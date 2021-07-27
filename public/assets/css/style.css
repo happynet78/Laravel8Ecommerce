@@ -519,7 +519,7 @@ input,textarea{
     display: none;
     padding-bottom: 12px;
 }
-.center-section .wrap-search-form .wrap-list-cate .list-cate li.level-0{
+.center-section .wrap-search-form .wrap-list-cate .list-cate li.level-0 {
 
 }
 .center-section .wrap-search-form .wrap-list-cate .link-control::after {
@@ -1343,7 +1343,7 @@ li.menu-item .nav-label.sale-label::before{
     right: 0;
     z-index: 1;
 }
-.banner-effect-1 figure:hover img{
+.banner-effect-1 figure:hover img {
     /*transform: scale(1.1);*/
 }
 .banner-effect-toright figure img,
@@ -7157,4 +7157,7 @@ background-color: #888888;
 	padding-right: 40px;
 	margin-bottom: 65px;
 	padding-left: 40px;
+}
+.text-red-600 {
+	color: red;
 }
