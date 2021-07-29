@@ -1,7 +1,5 @@
 <main id="main" class="main-site left-sidebar">
-
 	<div class="container">
-
 		<div class="wrap-breadcrumb">
 			<ul>
 				<li class="item-link"><a href="#" class="link">home</a></li>
@@ -9,9 +7,7 @@
 			</ul>
 		</div>
 		<div class="row">
-
 			<div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
-
 				<div class="banner-shop">
 					<a href="#" class="banner-link">
 						<figure><img src="{{ asset('assets/images/shop-banner.jpg') }}" alt=""></figure>
@@ -19,9 +15,7 @@
 				</div>
 
 				<div class="wrap-shop-control">
-
 					<h1 class="shop-title">Digital & Electronics</h1>
-
 					<div class="wrap-right">
 
 						<div class="sort-item orderby ">
@@ -51,11 +45,9 @@
 						</div>
 
 					</div>
-
 				</div><!--end wrap shop control-->
-
+                @if ($products->count() > 0)
 				<div class="row">
-
 					<ul class="product-list grid-products equal-container">
 						@foreach ($products as $product)
 							
@@ -76,8 +68,10 @@
 						@endforeach
 
 					</ul>
-
 				</div>
+				@else
+					<p style="padding-top: 30px; font-size: 2em;" class="text-center text-danger">No Products</p>
+                @endif
 
 				<div class="wrap-pagination-info">
 					{{ $products->links() }}
