@@ -6,7 +6,7 @@
                     <div class="panel-heading">
 						<div class="row">
 							<div class="col-md-6">
-								Add New Product
+								Edit Product
 							</div>
 							<div class="col-md-6">
 								<a href="{{ route('admin.products') }}" class="btn btn-success pull-right">All Products</a>
@@ -19,7 +19,7 @@
 								{{ session::get('message') }}
 							</div>
 						@endif
-                        <form class="form-horizontal" enctype="multipart/form-data" wire:submit.prevent="addProduct">
+                        <form class="form-horizontal" enctype="multipart/form-data" wire:submit.prevent="updateProduct">
                             <div class="form-group">
                                 <label for="" class="col-md-4 control-label">Product Name</label>
                                 <div class="col-md-4">
@@ -72,7 +72,7 @@
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Stock</label>
                                 <div class="col-md-4">
-                                    <select class="form-control custom-select" wire:model="stock_status">
+                                    <select class="form-control" wire:model="stock_status">
 										<option value="instock">InStock</option>
 										<option value="outofstock">Out Of Stock</option>
 									</select>
@@ -82,7 +82,7 @@
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Featured</label>
                                 <div class="col-md-4">
-                                    <select class="form-control custom-select" wire:model="featured">
+                                    <select class="form-control" wire:model="featured">
 										<option value="0">No</option>
 										<option value="1">Yes</option>
 									</select>
@@ -99,10 +99,11 @@
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Product Image</label>
                                 <div class="col-md-4">
-                                    <input type="file" class="custom-file-input input-file" wire:model="image">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
-									@if ($image)
-										<img src="{{ $image->temporaryUrl() }}" width="120" />
+                                    <input type="file" class="form-control input-file" wire:model="newimage">
+									@if ($newimage)
+										<img src="{{ $newimage->temporaryUrl() }}" width="120" />
+                                    @else
+                                        <img src="{{ asset('assets/images/products') }}/{{ $image }}" width="120" alt="">
 									@endif
                                 </div>
                             </div>
@@ -110,7 +111,7 @@
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Category</label>
                                 <div class="col-md-4">
-                                    <select class="form-control custom-select" wire:model="category_id">
+                                    <select class="form-control" wire:model="category_id">
 										<option value="">Select Category</option>
 										@foreach ($categories as $category)
 											<option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -122,7 +123,7 @@
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label"></label>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </div>
 
