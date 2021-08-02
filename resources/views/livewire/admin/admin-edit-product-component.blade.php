@@ -22,95 +22,106 @@
                         <form class="form-horizontal" enctype="multipart/form-data" wire:submit.prevent="updateProduct">
                             <div class="form-group">
                                 <label for="" class="col-md-4 control-label">Product Name</label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <input type="text" placeholder="Product Name" class="form-control input-md" wire:model="name" wire:keyup="generateSlug">
+                                    @error('name') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Product Slug</label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <input type="text" placeholder="Product Slug" class="form-control input-md" wire:model="slug">
+                                    @error('slug') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Short Description</label>
-                                <div class="col-md-4">
-                                    <textarea placeholder="Short Description" rows="3" class="form-control" wire:model="short_description"></textarea>
+                                <div class="col-md-8" wire:ignore>
+                                    <textarea placeholder="Short Description" id="short_description" rows="3" class="form-control" wire:model="short_description"></textarea>
+                                    @error('short_description') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Description</label>
-                                <div class="col-md-4">
-                                    <textarea placeholder="Description" rows="3" class="form-control" wire:model="description"></textarea>
+                                <div class="col-md-8" wire:ignore>
+                                    <textarea placeholder="Description" id="description" rows="3" class="form-control" wire:model="description"></textarea>
+                                    @error('description') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Regular Price</label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <input type="text" placeholder="Regular Price" class="form-control input-md" wire:model="regular_price">
+                                    @error('regular_price') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Sale Price</label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <input type="text" placeholder="Sale Price" class="form-control input-md" wire:model="sale_price">
+                                    @error('sale_price') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">SKU</label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <input type="text" placeholder="SKU" class="form-control input-md" wire:model="SKU">
+                                    @error('SKU') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Stock</label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <select class="form-control" wire:model="stock_status">
 										<option value="instock">InStock</option>
 										<option value="outofstock">Out Of Stock</option>
 									</select>
+                                    @error('stock_status') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Featured</label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <select class="form-control" wire:model="featured">
 										<option value="0">No</option>
 										<option value="1">Yes</option>
 									</select>
+                                    @error('featured') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Quantity</label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <input type="text" placeholder="Quantity" class="form-control input-md" wire:model="quantity">
+                                    @error('quantity') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Product Image</label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <input type="file" class="form-control input-file" wire:model="newimage">
 									@if ($newimage)
 										<img src="{{ $newimage->temporaryUrl() }}" width="120" />
                                     @else
                                         <img src="{{ asset('assets/images/products') }}/{{ $image }}" width="120" alt="">
 									@endif
+                                    @error('newimage') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label">Category</label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <select class="form-control" wire:model="category_id">
 										<option value="">Select Category</option>
 										@foreach ($categories as $category)
@@ -122,7 +133,7 @@
 
 							<div class="form-group">
                                 <label for="" class="col-md-4 control-label"></label>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </div>
@@ -134,3 +145,35 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+	<script>
+		$(function() {
+			tinymce.init({
+				selector: '#short_description', 
+				setup: function(editor) {
+					editor.on('Change', function(e) {
+						tinyMCE.triggerSave();
+						var sd_data = $('#short_description').val();
+						@this.set('short_description', sd_data)
+					});
+				},
+				lineheight_formats: '1',
+				height: 300,
+			});
+
+				tinymce.init({
+				selector: '#description', 
+				setup: function(editor) {
+					editor.on('Change', function(e) {
+						tinyMCE.triggerSave();
+						var d_data = $('#description').val();
+						@this.set('description', d_data)
+					});
+				},
+				lineheight_formats: '1',
+				height: 500,
+			});
+        });
+    </script>
+@endpush
