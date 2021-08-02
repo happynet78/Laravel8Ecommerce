@@ -92,6 +92,10 @@
 													<li class="menu-item">
 														<a title="Sale Setting" href="{{ route('admin.sale') }}">Sale Setting</a>
 													</li>
+													
+													<li class="menu-item">
+														<a title="All Coupon" href="{{ route('admin.coupons') }}">All Coupon</a>
+													</li>
 													<li class="menu-item">
 														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 													</li>
@@ -136,28 +140,11 @@
 						@livewire('header-search-component')
 
 						<div class="wrap-icon right-section">
-							<div class="wrap-icon-section wishlist">
-								<a href="#" class="link-direction">
-									<i class="fa fa-heart" aria-hidden="true"></i>
-									<div class="left-info">
-										@if (Cart::instance('wishlist')->count() > 0)
-											<span class="index">{{ Cart::instance('wishlist')->count() }} item</span>
-										@endif
-										<span class="title">Wishlist</span>
-									</div>
-								</a>
-							</div>
-							<div class="wrap-icon-section minicart">
-								<a href="#" class="link-direction">
-									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-									<div class="left-info">
-										@if(Cart::instance('cart')->count() > 0)
-										<span class="index">{{ Cart::instance('cart')->count() }} items</span>
-										@endif
-										<span class="title">CART</span>
-									</div>
-								</a>
-							</div>
+							<!-- Wish Count -->
+							@livewire('wishlist-count-component')
+							<!-- Cart Count -->
+							@livewire('cart-count-component')
+							
 							<div class="wrap-icon-section show-up-after-1024">
 								<a href="#" class="mobile-navigation">
 									<span></span>

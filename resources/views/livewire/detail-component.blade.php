@@ -7,6 +7,9 @@
 				text-decoration: line-through;
 				padding-left: 10px;
 			}
+			.fill-heart {
+				color: #FF7007 !important;
+			}
 		</style>
 
 		<div class="container">
@@ -18,7 +21,9 @@
 				</ul>
 			</div>
 			<div class="row">
-
+				@php
+					$witems = Cart::instance('wishlist')->content()->pluck('id');
+				@endphp
 				<div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
 					<div class="wrap-product-detail">
 						<div class="detail-media">
@@ -60,10 +65,9 @@
                             <div class="quantity">
                             	<span>Quantity:</span>
 								<div class="quantity-input">
-									<input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
-									
-									<a class="btn btn-reduce" href="#"></a>
-									<a class="btn btn-increase" href="#"></a>
+									<input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" wire:model="qty">
+									<a class="btn btn-reduce" href="#" wire:click.prevent="decreseQuantity"></a>
+									<a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity"></a>
 								</div>
 							</div>
 							<div class="wrap-butons">
@@ -74,7 +78,15 @@
 								@endif
                                 <div class="wrap-btn">
                                     <a href="#" class="btn btn-compare">Add Compare</a>
-                                    <a href="#" class="btn btn-wishlist">Add Wishlist</a>
+                                    @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
+										@if ($witems->contains($product->id))
+											<a href="#" class="btn btn-wishlist fill-heart">Add Wishlist</a>
+										@else
+											<a href="#" class="btn btn-wishlist" wire:click.prevent="addToWishlist({{ $product->id }}, '{{ $product->name }}', {{ $product->sale_price }}{{ $product->id }}, '{{ $product->name }}', {{ $product->sale_price }})">Add Wishlist</a>
+										@endif
+									@else
+										<a href="#" class="btn btn-wishlist" wire:click.prevent="addToWishlist({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})">Add Wishlist</a>
+									@endif
                                 </div>
 							</div>
 						</div>

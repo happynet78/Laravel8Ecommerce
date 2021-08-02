@@ -8,12 +8,16 @@ use App\Http\Livewire\DetailComponent;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\CheckoutComponent;
+use App\Http\Livewire\WishlistComponent;
 use App\Http\Livewire\Admin\AdminSaleComponent;
+use App\Http\Livewire\Admin\AdminCouponsComponent;
 use App\Http\Livewire\Admin\AdminProductComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\Admin\AdminCategoryComponent;
+use App\Http\Livewire\Admin\AdminAddCouponComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\AdminAddProductComponent;
+use App\Http\Livewire\Admin\AdminEditCouponComponent;
 use App\Http\Livewire\Admin\AdminHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\AdminEditProductComponent;
@@ -51,6 +55,8 @@ Route::get('/product-category/{category_slug}', CategoryComponent::class)->name(
 
 Route::get('/search', SearchComponent::class)->name('product.search');
 
+Route::get('/wishlist', WishlistComponent::class)->name('product.wishlist');
+
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('dashboard');
@@ -76,4 +82,8 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function() {
 
 	Route::get('/admin/home-categories', AdminHomeCategoryComponent::class)->name('admin.homecategories');
 	Route::get('/admin/sale', AdminSaleComponent::class)->name('admin.sale');
+
+	Route::get('/admin/coupons', AdminCouponsComponent::class)->name('admin.coupons');
+	Route::get('/admin/coupon/add', AdminAddCouponComponent::class)->name('admin.addcoupon');
+	Route::get('/admin/coupon/edit/{coupon_id}', AdminEditCouponComponent::class)->name('admin.editcoupon');
 });
