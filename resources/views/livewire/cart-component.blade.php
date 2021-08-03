@@ -1,4 +1,4 @@
-	
+
 	<main id="main" class="main-site">
 
 		<div class="container">
@@ -10,7 +10,7 @@
 				</ul>
 			</div>
 			<div class=" main-content-area">
-
+                @if(Cart::instance('cart')->count() > 0)
 				<div class="wrap-iten-in-cart">
 					@if(Session::has('success_message'))
 						<div class="alert alert-success">
@@ -31,7 +31,7 @@
 									<div class="price-field produtc-price"><p class="price">${{ $item->model->regular_price }}</p></div>
 									<div class="quantity">
 										<div class="quantity-input">
-											<input type="text" name="product-quatity" value="{{ $item->qty }}" data-max="120" pattern="[0-9]*" >									
+											<input type="text" name="product-quatity" value="{{ $item->qty }}" data-max="120" pattern="[0-9]*" >
 											<a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity('{{ $item->rowId }}')"></a>
 											<a class="btn btn-reduce" href="#" wire:click.prevent="decreaseQuantity('{{ $item->rowId }}')"></a>
 										</div>
@@ -46,7 +46,7 @@
 									</div>
 								</li>
 							@endforeach
-																			
+
 						</ul>
 					@else
 						<p>No item in cart</p>
@@ -68,7 +68,7 @@
 							<p class="summary-info total-info "><span class="title">Total</span><b class="index">${{ Cart::instance('cart')->total() }}</b></p>
 						@endif
 					</div>
-					
+
 					<div class="checkout-info">
 						@if(!Session::has('coupon'))
 						<label class="checkbox-field">
@@ -90,7 +90,7 @@
 							</div>
 						@endif
 						@endif
-						<a class="btn btn-checkout" href="checkout.html">Check out</a>
+						<a class="btn btn-checkout" href="#" wire:click.prevent="checkout">Check out</a>
 						<a class="link-to-shop" href="shop.html">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
 					</div>
 					<div class="update-clear">
@@ -98,6 +98,13 @@
 						<a class="btn btn-update" href="#">Update Shopping Cart</a>
 					</div>
 				</div>
+                @else
+                    <div class="text-center" style="padding: 30px 0;">
+                        <h1>Your cart is empty!</h1>
+                        <p>Add item to it now</p>
+                        <a href="/shop" class="btn btn-success">Shop Now</a>
+                    </div>
+                @endif
 
 				<div class="wrap-iten-in-cart">
 					<h3 class="title-box" style="border-bottom: 1px solid; padding-bottom: 15px;">{{ Cart::instance('saveForLater')->count() }} item(s) Save For Later</h3>
@@ -129,7 +136,7 @@
 									</div>
 								</li>
 							@endforeach
-																			
+
 						</ul>
 					@else
 						<p>No item saved for later</p>
@@ -287,7 +294,7 @@
 				</div>
 
 			</div><!--end main content area-->
+
 		</div><!--end container-->
 
 	</main>
-	
