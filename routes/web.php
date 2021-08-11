@@ -12,6 +12,7 @@ use App\Http\Livewire\ThankyouComponent;
 use App\Http\Livewire\WishlistComponent;
 use App\Http\Livewire\Admin\AdminSaleComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
+use App\Http\Livewire\User\UserReviewComponent;
 use App\Http\Livewire\Admin\AdminOrderComponent;
 use App\Http\Livewire\Admin\AdminCouponsComponent;
 use App\Http\Livewire\Admin\AdminProductComponent;
@@ -71,8 +72,9 @@ Route::get('/thank-you', ThankyouComponent::class)->name('thankyou');
 // for User or Customer
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 	Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
-	Route::get('/usr/orders', UserOrdersComponent::class)->name('user.orders');
-	Route::get('/usr/order/{order_id}', UserOrderDetailComponent::class)->name('user.orderdetails');
+	Route::get('/user/orders', UserOrdersComponent::class)->name('user.orders');
+	Route::get('/user/order/{order_id}', UserOrderDetailComponent::class)->name('user.orderdetails');
+	Route::get('/user/review/{order_item_id}', UserReviewComponent::class)->name('user.review');
 });
 
 // for Admin
