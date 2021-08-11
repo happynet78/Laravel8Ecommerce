@@ -10,4 +10,9 @@ class Review extends Model
     use HasFactory;
 
     protected $table = "reviews";
+
+    public function OrderItem()
+    {
+        return $this->belongsTo(OrderItem::class);
+    }
 }
