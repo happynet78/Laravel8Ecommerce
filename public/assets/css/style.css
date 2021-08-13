@@ -17437,3 +17437,6 @@ a.text-dark:focus {
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
+.text-red-600 {
+    color: red;
+}
