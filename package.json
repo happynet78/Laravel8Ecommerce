@@ -23,6 +23,7 @@
         "tailwindcss": "^2.2.2"
     },
     "dependencies": {
-        "laravel-mix": "^6.0.26"
+        "alpine": "^0.2.1",
+        "laravel-mix": "^6.0.28"
     }
 }
